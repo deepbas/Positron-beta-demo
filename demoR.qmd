@@ -1,0 +1,23 @@
+---
+title: "Demo in Positron"
+format: html
+message: false
+warning: false
+---
+
+
+```{r}
+library(plotly)
+x <- seq(-3, 3, length.out=100)
+z <- outer(x, x, Vectorize(\(a,b) mvtnorm::dmvnorm(c(a,b), mean=c(0,0), sigma=diag(2))))
+plot_ly(x=~x, y=~x, z=~z) |> add_surface(colorscale="Viridis")
+```
+
+
+
+```{python}
+import plotly
+import numpy as np, plotly.graph_objects as go
+x = np.linspace(-3, 3, 100); X, Y = np.meshgrid(x, x); Z = np.exp(-0.5 * (X**2 + Y**2)) / (2 * np.pi)
+go.Figure(go.Surface(x=x, y=x, z=Z, colorscale="Viridis")).show()
+```
